@@ -106,16 +106,7 @@ vector<QPoint> ft::Utils::readFaceFitPointsFile(QString sFileName)
 	QStringList lData;
 	int iNumPoints;
 
-	// Read the number of points from the first line
-	sLine = oStream.readLine();
-	lData = sLine.split(" ");
-	if (lData.size() != 2 || lData.at(0) != "n_points:")
-	{
-		oFile.close();
-		return vector<QPoint>();
-	}
-	else
-		iNumPoints = lData[1].toInt();
+	iNumPoints = 68;
 
 	// Read the points
 	vector<QPoint> vPoints;
@@ -139,8 +130,12 @@ vector<QPoint> ft::Utils::readFaceFitPointsFile(QString sFileName)
 
 	oFile.close();
 
-	if (vPoints.size() != iNumPoints)
+	if (vPoints.size() != iNumPoints) {
+
 		return vector<QPoint>();
+	}
 	else
 		return vPoints;
 }
+
+

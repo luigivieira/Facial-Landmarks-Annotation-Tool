@@ -354,9 +354,10 @@ void ft::MainWindow::onFitError(QProcess::ProcessError eError)
 void ft::MainWindow::onFitFinished(int iExitCode, QProcess::ExitStatus eExitStatus)
 {
 	QFileInfo oFileInfo(m_sFitTempFile);
+	
 	if (!oFileInfo.exists())
 	{
-		showStatusMessage(tr("The face fit utility could not fit the landmarks to this image."));
+		showStatusMessage(tr("No file with results exists."));
 		QFile::remove(m_sFitTempFile);
 		m_sFitTempFile = "";
 		return;
@@ -365,7 +366,7 @@ void ft::MainWindow::onFitFinished(int iExitCode, QProcess::ExitStatus eExitStat
 	vector<QPoint> vPoints = Utils::readFaceFitPointsFile(m_sFitTempFile);
 	if (vPoints.size() == 0)
 	{
-		showStatusMessage(tr("The face fit utility could not fit the landmarks to this image."));
+		showStatusMessage(tr("Number of returned points is 0."));
 		QFile::remove(m_sFitTempFile);
 		m_sFitTempFile = "";
 		return;
